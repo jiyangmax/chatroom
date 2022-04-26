@@ -14,16 +14,18 @@ public class NettyServer {
     EventLoopGroup bossGroup = new NioEventLoopGroup();
     EventLoopGroup wokerGroup = new NioEventLoopGroup();
 
-    try{
-        ServerBootstrap serverBootstrap = new ServerBootstrap();
-        serverBootstrap.group(bossGroup, wokerGroup).channel(NioServerSocketChannel.class)
-                .handler(new LoggingHandler(LogLevel.INFO))
-                .childHandler(new WebSocketChannelInitializer());
+    public void start() throws Exception{
+        try {
+            ServerBootstrap serverBootstrap = new ServerBootstrap();
+            serverBootstrap.group(bossGroup, wokerGroup).channel(NioServerSocketChannel.class)
+                    .handler(new LoggingHandler(LogLevel.INFO))
+                    .childHandler(new WebSocketChannelInitializer());
 
-        ChannelFuture channelFuture = serverBootstrap.bind(new InetSocketAddress(8899)).sync();
-        channelFuture.channel().closeFuture().sync();
-    }finally{
-        bossGroup.shutdownGracefully();
-        wokerGroup.shutdownGracefully();
+            ChannelFuture channelFuture = serverBootstrap.bind(new InetSocketAddress(8899)).sync();
+            channelFuture.channel().closeFuture().sync();
+        } finally {
+            bossGroup.shutdownGracefully();
+            wokerGroup.shutdownGracefully();
+        }
     }
 }
