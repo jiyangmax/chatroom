@@ -1,4 +1,4 @@
-package com.example.githubactionsjavatest;
+package com.github.chatroom;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
