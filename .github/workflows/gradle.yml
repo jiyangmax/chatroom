@@ -54,4 +54,5 @@ jobs:
         pass: ${{ secrets.AWS_PASSWORD }}
         last_ssh: |
           bash /home/webapp/start_with_docker.sh
+          
 
