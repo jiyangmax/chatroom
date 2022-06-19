@@ -45,15 +45,13 @@ jobs:
         context: ./
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/github-actions-java-test:latest
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/chatroom:latest
     - name: scp-deployer
       uses: cross-the-world/ssh-scp-ssh-pipelines@v1.1.4
       with:
         host: ${{ secrets.AWS_IP }}
         user: root
         pass: ${{ secrets.AWS_PASSWORD }}
-        scp: build/libs/github-actions-java-test-0.0.1-SNAPSHOT.jar => /home/webapp/
         last_ssh: |
-          bash /home/webapp/restart.sh
           bash /home/webapp/start_with_docker.sh
 
